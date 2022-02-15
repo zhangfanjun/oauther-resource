@@ -1,0 +1,17 @@
+security:
+  oauth2:
+    client:
+      # 客户端的配置
+      client-id: app-one
+      client-secret: 123
+      # 授权码模式
+      user-authorization-uri: http://127.0.0.1:9900/oauther2/oauth/authorize
+      # 密码模式获取token
+      access-token-uri: http://127.0.0.1:9900/oauther2/oauth/token
+#      grant-type: pasword
+    resource:
+      id: app1
+      jwt:
+        key-uri: http://127.0.0.1:9900/oauther2/oauth/token_key
+      user-info-uri: user-info
+#        key-value: dev
