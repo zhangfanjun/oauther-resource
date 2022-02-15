@@ -9,6 +9,8 @@ security:
       # 密码模式获取token
       access-token-uri: http://127.0.0.1:9900/oauther2/oauth/token
 #      grant-type: pasword
+    authorization:
+      check-token-access: http://127.0.0.1:9900/oauther2/oauth/check_token
     resource:
       id: app1
       jwt:
