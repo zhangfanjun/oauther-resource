@@ -66,7 +66,7 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
                 .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
                 .authorities("admin", "user")
                 .scopes("read", "write", "all","ROLE_ADMIN")
-                .resourceIds("app1")
+                .resourceIds("app11","app1")
                 .accessTokenValiditySeconds(60000)
                 .refreshTokenValiditySeconds(120000)
                 .redirectUris("http://mrbird.cc")
