@@ -5,13 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.builders.JdbcClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+
+import javax.sql.DataSource;
 
 /**
  * 开启AuthorizationServer
@@ -39,7 +43,8 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
     private AuthenticationManager authenticationManager;
     @Autowired
     private MyUserDetailService myUserDetailService;
-
+    @Autowired
+    private DataSource dataSource;
     /**
      * 默认token不允许获取，默认不允许用户表单登录，允许token的校验
      */
@@ -60,25 +65,40 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("app-one")
-                .secret(passwordEncoder.encode("123"))
-                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
-                .authorities("admin", "user")
-                .scopes("read", "write", "all","ROLE_ADMIN")
-                .resourceIds("app11","app1")
-                .accessTokenValiditySeconds(60000)
-                .refreshTokenValiditySeconds(120000)
-                .redirectUris("http://mrbird.cc")
-                .and()
-                .withClient("app-two")
-                .secret(passwordEncoder.encode("123"))
-                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
-                .authorities("admin", "user")
-                .scopes("read", "write", "all","ROLE_ADMIN")
-                .accessTokenValiditySeconds(60000)
-                .refreshTokenValiditySeconds(120000)
-                .redirectUris("http://mrbird.cc");
+        //内存模式
+//        clients.inMemory()
+//                .withClient("app-one")
+//                .secret(passwordEncoder.encode("123"))
+//                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
+//                .authorities("admin", "user")
+//                .scopes("read", "write", "all","ROLE_ADMIN")
+//                .resourceIds("app11","app1")
+//                .accessTokenValiditySeconds(60000)
+//                .refreshTokenValiditySeconds(120000)
+//                .redirectUris("http://mrbird.cc")
+//                .and()
+//                .withClient("app-two")
+//                .secret(passwordEncoder.encode("123"))
+//                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code", "client_credentials")
+//                .authorities("admin", "user")
+//                .scopes("read", "write", "all","ROLE_ADMIN")
+//                .accessTokenValiditySeconds(60000)
+//                .refreshTokenValiditySeconds(120000)
+//                .redirectUris("http://mrbird.cc");
+
+        //数据库加载的方式
+//        JdbcClientDetailsServiceBuilder jcsb = clients.jdbc(dataSource);
+//        jcsb.passwordEncoder(passwordEncoder);
+
+        //自定义模式
+//        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
+//        clients.withClientDetails(jdbcClientDetailsService);
+
+
+        //自定义模式
+        JdbcClientDetailsServiceBuilder jdbcClientDetailsServiceBuilder = new JdbcClientDetailsServiceBuilder().dataSource(dataSource).passwordEncoder(passwordEncoder);
+        clients.configure(jdbcClientDetailsServiceBuilder);
+
     }
 
     /**
