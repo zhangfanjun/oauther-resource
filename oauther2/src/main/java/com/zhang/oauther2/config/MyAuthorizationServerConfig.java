@@ -87,8 +87,8 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
 //                .redirectUris("http://mrbird.cc");
 
         //数据库加载的方式
-//        JdbcClientDetailsServiceBuilder jcsb = clients.jdbc(dataSource);
-//        jcsb.passwordEncoder(passwordEncoder);
+        JdbcClientDetailsServiceBuilder jcsb = clients.jdbc(dataSource);
+        jcsb.passwordEncoder(passwordEncoder);
 
         //自定义模式
 //        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
@@ -96,8 +96,8 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
 
 
         //自定义模式
-        JdbcClientDetailsServiceBuilder jdbcClientDetailsServiceBuilder = new JdbcClientDetailsServiceBuilder().dataSource(dataSource).passwordEncoder(passwordEncoder);
-        clients.configure(jdbcClientDetailsServiceBuilder);
+//        JdbcClientDetailsServiceBuilder jdbcClientDetailsServiceBuilder = new JdbcClientDetailsServiceBuilder().dataSource(dataSource).passwordEncoder(passwordEncoder);
+//        clients.configure(jdbcClientDetailsServiceBuilder);
 
     }
 
