@@ -29,8 +29,9 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/oauth/token_key").permitAll();
-        http.authorizeRequests().antMatchers("/oauther2/oauth/check_token").permitAll();
+//        http.authorizeRequests().antMatchers("/oauth/token_key").permitAll();
+//        http.authorizeRequests().antMatchers("/oauther2/oauth/check_token").permitAll();
+//        http.authorizeRequests().antMatchers("/oauther2/**").permitAll();
         http.authorizeRequests().anyRequest().permitAll();
 //        http.authorizeRequests().antMatchers("/**").permitAll();
     }

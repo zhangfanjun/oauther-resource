@@ -1,10 +1,12 @@
 package com.zhang.oauther2.config;
 
+import com.zhang.oauther2.config.myclientdetail.MyClientDetailsService;
 import com.zhang.oauther2.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.config.annotation.builders.ClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.builders.JdbcClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -87,17 +89,18 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
 //                .redirectUris("http://mrbird.cc");
 
         //数据库加载的方式
-        JdbcClientDetailsServiceBuilder jcsb = clients.jdbc(dataSource);
-        jcsb.passwordEncoder(passwordEncoder);
+//        JdbcClientDetailsServiceBuilder jcsb = clients.jdbc(dataSource);
+//        jcsb.passwordEncoder(passwordEncoder);
 
         //自定义模式
 //        JdbcClientDetailsService jdbcClientDetailsService = new JdbcClientDetailsService(dataSource);
+//        jdbcClientDetailsService.setPasswordEncoder(passwordEncoder);
 //        clients.withClientDetails(jdbcClientDetailsService);
 
-
-        //自定义模式
-//        JdbcClientDetailsServiceBuilder jdbcClientDetailsServiceBuilder = new JdbcClientDetailsServiceBuilder().dataSource(dataSource).passwordEncoder(passwordEncoder);
-//        clients.configure(jdbcClientDetailsServiceBuilder);
+        //自定义客户信息service
+        MyClientDetailsService my = new MyClientDetailsService();
+        my.passwordEncoder(passwordEncoder);
+        clients.withClientDetails(my);
 
     }
 
