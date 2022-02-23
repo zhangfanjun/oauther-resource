@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -27,10 +28,13 @@ public class MyClientDetailController {
     }
 
     @RequestMapping("/add")
-    public Object add(String clientId,String clientSecret){
+    public Object add(String clientId,String clientSecret,String scope){
         BaseClientDetails one = new BaseClientDetails();
         one.setClientSecret(passwordEncoder.encode(clientSecret));
         one.setClientId(clientId);
+        ArrayList<String> objects = new ArrayList<>();
+        objects.add(scope);
+        one.setScope(objects);
         return MyClientDetailsInfo.temp.put(clientId, JSON.toJSONString(one));
     }
 
