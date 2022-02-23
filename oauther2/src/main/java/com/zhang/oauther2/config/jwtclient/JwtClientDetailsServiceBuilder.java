@@ -8,12 +8,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @Copyright 深圳金雅福控股集团有限公司
- * @Author: zhangfanjun
- * @Date 2021/11/17
- * @Version: 1.0
- */
+
 public class JwtClientDetailsServiceBuilder extends ClientDetailsServiceBuilder<JwtClientDetailsServiceBuilder> {
 
     private Map<String, ClientDetails> clientDetails = new ConcurrentHashMap();

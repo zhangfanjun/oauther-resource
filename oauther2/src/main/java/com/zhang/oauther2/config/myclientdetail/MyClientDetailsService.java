@@ -2,22 +2,18 @@ package com.zhang.oauther2.config.myclientdetail;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.exceptions.InvalidClientException;
-import org.springframework.security.oauth2.config.annotation.builders.JdbcClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * @Copyright 深圳金雅福控股集团有限公司
- * @Author: zhangfanjun
- * @Date 2021/11/17
- * @Version: 1.0
- */
+
 public class MyClientDetailsService implements ClientDetailsService, ClientRegistrationService {
 
     private static final Map<String, String> temp = MyClientDetailsInfo.temp;

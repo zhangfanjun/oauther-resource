@@ -1,5 +1,4 @@
 ///*
-// * Copyright (c) 2019-2029 深圳金雅福控股集团有限公司 All Rights Reserved.FileName: ResourceServerConfigurer.java@author: 000062064@date: 19-6-10 上午11:01@version: 1.0
 // */
 //
 //package com.zhang.app1.config.client;

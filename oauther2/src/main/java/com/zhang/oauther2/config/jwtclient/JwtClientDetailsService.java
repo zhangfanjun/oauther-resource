@@ -12,12 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @Copyright 深圳金雅福控股集团有限公司
- * @Author: zhangfanjun
- * @Date 2021/11/17
- * @Version: 1.0
- */
+
 @Data
 public class JwtClientDetailsService implements ClientDetailsService {
     private PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();

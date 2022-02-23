@@ -6,12 +6,7 @@
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 //
-///**
-// * @Copyright 深圳金雅福控股集团有限公司
-// * @Author: zhangfanjun
-// * @Date 2021/11/17
-// * @Version: 1.0
-// */
+
 //@Configuration
 //public class JwtClientConfig {
 //
